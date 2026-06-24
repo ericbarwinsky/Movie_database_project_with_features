@@ -1,0 +1,6 @@
+.env
+__pycache__/
+storage/__pycache__/
+data/*.db
+_static/index.html
+.idea/
