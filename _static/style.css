@@ -1,52 +1,121 @@
 body {
-  background: #F5F5F0;
-  color: black;
-  font-family: Monaco;
+  background: #141414;
+  color: #FFFFFF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .list-movies-title {
-  padding: 10px 0;
-  background: #009B50;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #009B50 0%, #006633 100%);
   color: white;
   text-align: center;
-  font-size: 16pt;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
+.container {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Flex-Grid für unendlich viele Filme */
 .movie-grid {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  margin-top: 20px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
   justify-content: center;
 }
 
-.movie-grid li {
-  padding: 10px 15px;
-  text-align: left;
-}
-
 .movie {
-  width: 140px;
+  width: 160px;
+  background: #1F1F1F;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
-.movie-title,
-.movie-year {
-  font-size: 0.8em;
-  text-align: center;
+.movie:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 155, 80, 0.4);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Badge für Flagge und Bewertung */
+.movie-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding: 0 4px;
+}
+
+.country-flag {
+  width: 22px;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.movie-rating {
+  font-size: 0.85em;
+  color: #FFC107;
+  font-weight: bold;
 }
 
 .movie-title {
-  margin-top: 10px;
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .movie-year {
-  color: #999;
+  font-size: 0.8em;
+  color: #888;
+  text-align: center;
+  margin-top: 2px;
 }
 
+/* --- TOOLTIP NOTIZ FEATURE --- */
+.movie.has-note::after {
+  content: "📝 " attr(data-note);
+  position: absolute;
+  bottom: 105%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  color: #FFF;
+  padding: 8px 12px;
+  font-size: 0.8em;
+  border-radius: 5px;
+  border: 1px solid #009B50;
+  width: 180px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 100;
+}
 
-.movie-poster {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    width: 128px;
-    height: 193px;
+.movie.has-note:hover::after {
+  opacity: 1;
+  visibility: visible;
 }
